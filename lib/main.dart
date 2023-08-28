@@ -91,8 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Divider(),
               Container(
                 alignment: Alignment.center,
+
                 color: Colors.grey,
                 height: 220,
                 child: PageView(
@@ -103,7 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Text('PLACEHOLDER DLA WYKRESU 7 DNI'),
                         // Dodaj tutaj wykres dla 7 dni
                       ],
+
                     ),
+
                     // Placeholder dla wykresu 30 dni
                     Column(
                       children: [
