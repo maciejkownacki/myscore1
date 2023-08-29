@@ -121,16 +121,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Divider(),
               Container(
                 alignment: Alignment.center,
-                color: Colors.grey,
-                height: 200,
-                child: const Text('INNY ELEMENT'),
+                color: Colors.green,
+                height: 100,
+                child: const Text('ZDROWIE'),
               ),
+
+              Divider(),
               Container(
                 alignment: Alignment.center,
-                color: Colors.red,
-                height: 300,
-                child: const Text('INNY ELEMENT'),
+                color: Colors.blue,
+                height: 100,
+                child: const Text('CLICK TO ADD NEW'),
               ),
+
+
             ],
           ),
         )
