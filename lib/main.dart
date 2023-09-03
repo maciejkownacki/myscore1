@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
-
-
-
 void main() {
   runApp(const MyApp());
+}
+
+class Category {
+  final String title;
+  final IconData icon;
+
+  Category(this.title, this.icon);
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -34,111 +37,92 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final List<Category> categories = [];
 
-  void _incrementCounter() {
+  void addCategory() {
     setState(() {
-     _counter++;
+      categories.add(Category('Nowa Kategoria', Icons.star));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        backgroundColor: Colors.white,
         title: Row(
-            children: [
+          children: [
             Spacer(),
-        Expanded(
-          flex: 6,
-          child: Align(
-            alignment: Alignment.center,
-            child: Image.asset(
-              'assets/images/logo.png',
-              fit: BoxFit.contain,
-              height: 150,
-              width: 200,
-            ),
-          ),
-        ),
-              IconButton(
-                icon: Icon(Icons.settings),
-                color: Theme.of(context).colorScheme.onSurface,
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => SettingsPage(),
-                  //   ),
-                  // );
-                },
-              ),
-      ],
-      ),
-      ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Divider(),
-              Container(
+            Expanded(
+              flex: 6,
+              child: Align(
                 alignment: Alignment.center,
-
-                color: Colors.grey,
-                height: 220,
-                child: PageView(
-                  children: <Widget>[
-                    // Placeholder dla wykresu 7 dni
-                    Column(
-                      children: [
-                        Text('PLACEHOLDER DLA WYKRESU 7 DNI'),
-                        // Dodaj tutaj wykres dla 7 dni
-                      ],
-
-                    ),
-
-                    // Placeholder dla wykresu 30 dni
-                    Column(
-                      children: [
-                        Text('PLACEHOLDER DLA WYKRESU 30 DNI'),
-                        // Dodaj tutaj wykres dla 30 dni
-                      ],
-                    ),
-                  ],
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  fit: BoxFit.contain,
+                  height: 150,
+                  width: 200,
                 ),
               ),
-              Divider(),
-              Container(
-                alignment: Alignment.center,
-                color: Colors.green,
-                height: 100,
-                child: const Text('ZDROWIE'),
+            ),
+            IconButton(
+              icon: Icon(Icons.settings),
+              color: Theme.of(context).colorScheme.onSurface,
+              onPressed: () {
+                // Otwórz stronę ustawień
+              },
+            ),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Divider(),
+            Container(
+              alignment: Alignment.center,
+              color: Colors.grey,
+              height: 220,
+              child: PageView(
+                children: <Widget>[
+                  Column(
+                    children: [
+                      Text('PLACEHOLDER DLA WYKRESU 7 DNI'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('PLACEHOLDER DLA WYKRESU 30 DNI'),
+                    ],
+                  ),
+                ],
               ),
-
-              Divider(),
-              Container(
-                alignment: Alignment.center,
-                color: Colors.blue,
-                height: 100,
-                child: const Text('CLICK TO ADD NEW'),
-              ),
-
-
-            ],
-          ),
-        )
-// This trailing comma makes auto-formatting nicer for build methods.
+            ),
+            Divider(),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Icon(categories[index].icon),
+                  title: Text(categories[index].title),
+                  onTap: () {
+                    // Logika szczegółów kategorii
+                  },
+                );
+              },
+            ),
+            Divider(),
+            FloatingActionButton(
+              onPressed: addCategory, // Użyj metody addCategory
+              child: const Icon(Icons.add),
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.red,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
